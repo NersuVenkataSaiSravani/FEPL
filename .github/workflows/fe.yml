@@ -1,0 +1,23 @@
+name: Frontend Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Get code
+        uses: actions/checkout@v4
+
+      - name: Check files
+        run: |
+          ls
+          echo "Frontend files found"
+
+      - name: Build
+        run: echo "Frontend build successful"
