@@ -1,0 +1,39 @@
+name: Deploy Frontend to AWS S3
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Get code
+        uses: actions/checkout@v4
+
+      - name: Check files
+        run: |
+          ls
+          echo "Frontend files found"
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ap-south-1
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync . s3://pipelinedeploy \
+            --exclude ".git/*" \
+            --exclude ".github/*"
+
+      - name: Deployment successful
+        run: echo "Website deployed successfully to S3!"
