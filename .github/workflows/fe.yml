@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
-  pages: write
+permissions: 
+  contents: read  # pipeline needs perission to read our repository files
+  pages: write    # to deploy our website to github page, without this deployment fail
   id-token: write
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
+       # Build has 3 steps
       - name: Get code
         uses: actions/checkout@v4
 
@@ -24,21 +24,21 @@ jobs:
           ls
           echo "Frontend files found"
 
-      - name: Upload website
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
+      - name: Upload website   # Prepares our website files so that github pages can deploy them.
+        uses: actions/upload-pages-artifact@v3  #Files r uploaded as pages artifact
+        with:  
+          path: .   #Upload the file from this directory here, . means current directory
 
-  deploy:
+  deploy:   #First job prepared the website and the 2nd job actually deploys
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  #GitHub gives the deploy job an Ubuntu runner.
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }} #This is used to show the actual GitHub Pages URL after deployment.
 
     steps:
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        id: deployment   #Get the page_url output from the step whose ID is deployment. So, this and url are connected.
+        uses: actions/deploy-pages@v4 #This is the step that actually publishes your website.
