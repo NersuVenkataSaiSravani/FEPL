@@ -1,9 +1,7 @@
 name: Frontend Deployment
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 permissions: 
   contents: read  # pipeline needs perission to read our repository files // Pipeline allowed to read our repository files.
