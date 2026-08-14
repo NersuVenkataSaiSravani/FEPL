@@ -29,7 +29,7 @@ jobs:
 
   deploy:   #First job prepared the website and the 2nd job actually deploys
     needs: build
-    runs-on: ubuntu-latest  #GitHub gives the deploy job an Ubuntu runner.
+    runs-on: ubuntu-latest  #GitHub gives the deploy job an Ubuntu runner. GitHub gives the deploy job another temporary Ubuntu machine
 
     environment:
       name: github-pages
