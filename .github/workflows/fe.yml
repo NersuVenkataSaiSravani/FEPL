@@ -25,7 +25,7 @@ jobs:
       - name: Upload website   # Prepares our website files so that github pages can deploy them.
         uses: actions/upload-pages-artifact@v3  #Files r uploaded as pages artifact
         with:  
-          path: .   #Upload the file from this directory here, . means current directory
+          path: .   #Upload the file from this directory here, . means current directory. Telling it to upload everything in the current directory
 
   deploy:   #First job prepared the website and the 2nd job actually deploys
     needs: build
