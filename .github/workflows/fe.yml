@@ -3,10 +3,10 @@ name: Frontend Deployment
 on:
   workflow_dispatch:
 
-#permissions: 
-  #contents: read  # pipeline needs perission to read our repository files // Pipeline allowed to read our repository files.
-  #pages: write    # to deploy our website to github page, without this deployment fail
-  #id-token: write
+permissions: 
+  contents: read  # pipeline needs perission to read our repository files // Pipeline allowed to read our repository files.
+  pages: write    # to deploy our website to github page, without this deployment fail
+  id-token: write
 
 jobs:
   build:
